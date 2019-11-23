@@ -11,64 +11,38 @@ export function Home() {
 	const [fourth, setFourth] = useState(0);
 	const [fifth, setFifth] = useState(0);
 	const [sixth, setSixth] = useState(0);
-	useEffect(
-		() => {
-			if (first === 10) {
-				setFirst(0);
-				addOne(second, setSecond);
-				Alert();
-			} else {
-				timer(first, setFirst);
-			}
-			if (second === 6) {
-				setSecond(0);
-				addOne(third, setThird);
-			}
-			if (third === 10) {
-				setThird(0);
-				addOne(fourth, setFourth);
-			}
-			if (fifth === 6) {
-				setFifth(0);
-				addOne(sixth, setSixth);
-			}
-			if (sixth === 2 && fifth === 4) {
-				setSixth(0);
-				setFifth(0);
-				setThird(0);
-				setSecond(0);
-				setFirst(0);
-			}
-		},
-		[first, second, third, fourth, fifth, sixth]
-	);
+	const [counter, setCounter] = useState(0);
+
+	useEffect(() => {
+		setInterval(function() {
+			//render your react application
+			// WHEN THE COUNTER OF THE FIRST
+			setSixth(counter / 1);
+			// const fifth = Math.floor(counter / 10);
+			// const fourth = Math.floor(counter / 100);
+			// const third = Math.floor(counter / 1000);
+			// const second = Math.floor(counter / 10000);
+
+			setCounter(counter + 1);
+		}, 1000);
+	});
 	return (
 		<div className="text-center mt-5">
 			<div className="container text-center mt-5">
 				<div className="jumbotron">
-					<h1>REACT COUNTER</h1>
+					<h1>REACT </h1>
 				</div>
-				<button
-					className="btn btn-danger mr-3"
-					onClick={backgroundChangeHandler}>
-					Toggle Background Color
-				</button>
-				<button className="btn btn-info" onClick={pauseHandler}>
-					<i className={playIcons} /> {playBtn} Counter
-				</button>
 			</div>
 			<div className="mainCountDiv container text-center">
 				<div>
 					<i className="far fa-clock" />
 				</div>
-				<div>{sixth}</div>
+				<div>{sixth % 10}</div>
 				<div>{fifth}</div>
 				<div>{fourth}</div>
 				<div>{third}</div>
 				<div>{second}</div>
-				<div>{first}</div>
 			</div>
-			<Footer />
 		</div>
 	);
 }
