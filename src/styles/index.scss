@@ -11,3 +11,15 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+.digit{
+  width: 25%;
+  background: black;
+  color: white;
+  text-align: center;
+  padding: 30px;
+  font-size: 50px
+}
+.flex-container {
+  display: flex;
+  padding: 30px;
+}

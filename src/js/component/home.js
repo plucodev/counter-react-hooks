@@ -11,10 +11,12 @@ export function Home() {
 
 	return (
 		<>
-			<h1>{Math.floor(count / 1) % 10}</h1>
-			<h1>{Math.floor(count / 10) % 10}</h1>
-			<h1>{Math.floor(count / 100) % 10}</h1>
-			<h1>{Math.floor(count / 100) % 10}</h1>
+			<div class="flex-container">
+				<div className="digit four">{Math.floor(count / 100) % 10}</div>
+				<div className="digit">{Math.floor(count / 100) % 10}</div>
+				<div className="digit">{Math.floor(count / 10) % 10}</div>
+				<div className="digit ">{Math.floor(count / 1) % 10}</div>
+			</div>
 		</>
 	);
 }
