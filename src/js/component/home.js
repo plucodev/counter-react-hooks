@@ -1,48 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 export function Home() {
-	const [first, setFirst] = useState(0);
-	const [second, setSecond] = useState(0);
-	const [third, setThird] = useState(0);
-	const [fourth, setFourth] = useState(0);
-	const [fifth, setFifth] = useState(0);
-	const [sixth, setSixth] = useState(0);
-	const [counter, setCounter] = useState(0);
+	const [count, setCount] = useState(0);
 
-	useEffect(() => {
-		setInterval(function() {
-			//render your react application
-			// WHEN THE COUNTER OF THE FIRST
-			setSixth(counter / 1);
-			// const fifth = Math.floor(counter / 10);
-			// const fourth = Math.floor(counter / 100);
-			// const third = Math.floor(counter / 1000);
-			// const second = Math.floor(counter / 10000);
+	useInterval(() => {
+		// Your custom logic here
+		setCount(count + 1);
+	}, 1000);
 
-			setCounter(counter + 1);
-		}, 1000);
-	});
 	return (
-		<div className="text-center mt-5">
-			<div className="container text-center mt-5">
-				<div className="jumbotron">
-					<h1>REACT </h1>
-				</div>
-			</div>
-			<div className="mainCountDiv container text-center">
-				<div>
-					<i className="far fa-clock" />
-				</div>
-				<div>{sixth % 10}</div>
-				<div>{fifth}</div>
-				<div>{fourth}</div>
-				<div>{third}</div>
-				<div>{second}</div>
-			</div>
-		</div>
+		<>
+			<h1>{Math.floor(count / 1) % 10}</h1>
+			<h1>{Math.floor(count / 10) % 10}</h1>
+			<h1>{Math.floor(count / 100) % 10}</h1>
+			<h1>{Math.floor(count / 100) % 10}</h1>
+		</>
+	);
+}
+
+function useInterval(callback, delay) {
+	const savedCallback = useRef();
+
+	// Remember the latest function.
+	useEffect(
+		() => {
+			savedCallback.current = callback;
+		},
+		[callback]
+	);
+
+	// Set up the interval.
+	useEffect(
+		() => {
+			function tick() {
+				savedCallback.current();
+			}
+			if (delay !== null) {
+				let id = setInterval(tick, delay);
+				return () => clearInterval(id);
+			}
+		},
+		[delay]
 	);
 }
